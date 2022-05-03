@@ -6,11 +6,15 @@ import sys
 import argparse
 from tqdm import tqdm
 import time
+import platform
 
 parser = argparse.ArgumentParser(description='Sends files to Spike Hub file system')
 parser.add_argument('file', help='file name')
 parser.add_argument('dir', nargs='?', help='destination directory', default = '')
-parser.add_argument('-t', '--tty', help='Spike Hub device path', default='/dev/ttyACM0')
+if platform.system() == "Windows":
+  parser.add_argument('-p', '--port', help='Spike Hub device path', default='com5')
+elif:
+  parser.add_argument('-t', '--tty', help='Spike Hub device path', default='/dev/ttyACM0')
 args = parser.parse_args()
 
 path, file = os.path.split(args.file)
